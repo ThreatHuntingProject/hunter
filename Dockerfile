@@ -17,9 +17,6 @@ RUN apt-get install --yes build-essential
 
 # While we are still root, install some packages we need as prereqs for
 # python modules later
-# graphistry prereqs
-RUN apt-get install --yes libxml2-dev
-RUN apt-get install --yes libigraph0-dev 
 # matplotlib prereqs
 RUN apt-get install --yes libfreetype6-dev
 RUN apt-get install --yes libxft-dev
@@ -42,10 +39,6 @@ RUN pip2 install --upgrade pandas
 # Install Plot.ly for most visualization needs
 RUN pip install plotly
 RUN pip2 install plotly
-
-# Graph visualization for Jupyter notebooks (requires paid API key)
-RUN pip install "graphistry[all]"
-RUN pip2 install "graphistry[all]"
 
 # Matplotlib in case anyone actually wants that. ;-)
 RUN pip install --upgrade matplotlib
