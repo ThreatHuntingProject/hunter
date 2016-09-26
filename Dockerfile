@@ -1,5 +1,5 @@
 # We're built on the official Jupyter image for PySpark notebooks
-FROM jupyter/pyspark-notebook
+FROM jupyter/pyspark-notebook:latest
 
 # But if it all breaks, blame us instead
 MAINTAINER The ThreatHunting Project <project@threathunting.net>
@@ -10,8 +10,7 @@ USER root
 # Update the list of packages so we can install what we need
 RUN apt-get update --yes
 
-# Install pip and the pieces necessary to build Python modules
-RUN apt-get install --yes python-pip
+# Make sure we have the necessary pieces to build Python modules
 RUN apt-get install --yes python-dev
 RUN apt-get install --yes build-essential
 
@@ -27,36 +26,32 @@ RUN apt-get install --yes libpng-dev
 USER $NB_USER
 
 # Maybe not strictly necessary, but often a good idea to have around
-RUN pip install virtualenv
-RUN pip2 install virtualenv
+RUN conda install -y virtualenv
+RUN conda install -y --name python2 virtualenv
 
 # Basic analysis packages
-RUN pip install --upgrade numpy
-RUN pip2 install --upgrade numpy
-RUN pip install --upgrade pandas
-RUN pip2 install --upgrade pandas
+RUN conda install -y numpy
+RUN conda install -y --name python2  numpy
+RUN conda install -y  pandas
+RUN conda install -y --name python2  pandas
 
 # Install Plot.ly for most visualization needs
-RUN pip install plotly
-RUN pip2 install plotly
+RUN conda install -y plotly
+RUN conda install -y --name python2 plotly
 
 # Matplotlib in case anyone actually wants that. ;-)
-RUN pip install --upgrade matplotlib
-RUN pip2 install --upgrade matplotlib
+RUN conda install -y  matplotlib
+RUN conda install -y --name python2  matplotlib
 
 # Machine learning modules
-RUN pip install --upgrade scikit-learn
-RUN pip2 install --upgrade scikit-learn
-RUN pip install --upgrade sklearn
-RUN pip2 install --upgrade sklearn
-RUN pip install --upgrade sklearn-extensions 
-RUN pip2 install --upgrade sklearn-extensions 
+RUN conda install -y  scikit-learn
+RUN conda install -y --name python2  scikit-learn
 
 # Elasticsearch client for Python.  The DSL (high level) version also installs
 # the standard elasticsearch-py library as a dependency, so it's available
 # even though we don't explicity install it here.
-RUN pip install --upgrade elasticsearch-dsl
-RUN pip2 install --upgrade elasticsearch-dsl
+RUN conda install -y  elasticsearch-dsl
+RUN conda install -y --name python2  elasticsearch-dsl
 
 # The first time you 'import plotly' on a new system, it has to build the
 # font cache.  This takes a while and also causes spurious warnings, so
