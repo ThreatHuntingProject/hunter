@@ -64,4 +64,6 @@ RUN pip2 install --upgrade elasticsearch-dsl
 # see it.
 RUN /bin/bash -c 'source /opt/conda/bin/activate && echo 'import plotly' | python -'
 RUN /bin/bash -c 'source /opt/conda/envs/python2/bin/activate && echo 'import plotly' | python -'
-RUN conda env list
+
+
+
