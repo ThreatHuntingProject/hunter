@@ -11,7 +11,7 @@ DATAVOL=$(HOME)
 # container.  Usually you can just leave this as-is.
 LOCALPORT=8888
 
-build:	Dockerfile
+build:	Dockerfile refresh
 	docker build -t $(REPO)/$(IMAGE_NAME):latest -t $(REPO)/$(IMAGE_NAME):$(DATE) .
 
 refresh:
@@ -22,3 +22,4 @@ run:
 
 push:
 	docker push $(REPO)/$(IMAGE_NAME):latest
+	docker push $(REPO)/$(IMAGE_NAME):$(DATE)
