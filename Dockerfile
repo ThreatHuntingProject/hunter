@@ -63,7 +63,7 @@ RUN /bin/bash -c 'source /opt/conda/envs/python2/bin/activate && echo 'import pl
 # Set the notebook default password
 ADD passwd-helper.py /tmp
 ARG JUPYTER_NB_PASS
-RUN a=c JUPYTER_NB_PASS=${JUPYTER_NB_PASS}  python /tmp/passwd-helper.py | tee -a /home/jovyan/.jupyter/jupyter_notebook_config.py
+RUN JUPYTER_NB_PASS=${JUPYTER_NB_PASS}  python /tmp/passwd-helper.py >> /home/jovyan/.jupyter/jupyter_notebook_config.py
 
 
 
