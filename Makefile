@@ -12,7 +12,7 @@ DATAVOL=$(HOME)
 LOCALPORT=8888
 
 build:	Dockerfile refresh
-	docker build -t $(REPO)/$(IMAGE_NAME):latest -t $(REPO)/$(IMAGE_NAME):$(DATE) .
+	docker build --build-arg JUPYTER_NB_PASS=$$JUPYTER_NB_PASS -t $(REPO)/$(IMAGE_NAME):latest -t $(REPO)/$(IMAGE_NAME):$(DATE) .
 
 refresh:
 	docker pull jupyter/pyspark-notebook

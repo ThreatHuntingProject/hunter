@@ -60,5 +60,11 @@ RUN conda install -y --name python2  elasticsearch-dsl
 RUN /bin/bash -c 'source /opt/conda/bin/activate && echo 'import plotly' | python -'
 RUN /bin/bash -c 'source /opt/conda/envs/python2/bin/activate && echo 'import plotly' | python -'
 
+# Set the notebook default password
+ADD passwd-helper.py /tmp
+ARG JUPYTER_NB_PASS
+RUN a=c JUPYTER_NB_PASS=${JUPYTER_NB_PASS}  python /tmp/passwd-helper.py | tee -a /home/jovyan/.jupyter/jupyter_notebook_config.py
+
+
 
 
