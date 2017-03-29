@@ -53,6 +53,11 @@ RUN conda install -y --name python2  scikit-learn
 RUN conda install -y  elasticsearch-dsl
 RUN conda install -y --name python2  elasticsearch-dsl
 
+# Grab the Splunk SDK as well.  Note that this seems to only support
+# python2.  Also, it's not in the conda channel, so we have to use
+# pip.
+RUN pip2 install splunk-sdk
+
 # The first time you 'import plotly' on a new system, it has to build the
 # font cache.  This takes a while and also causes spurious warnings, so
 # we can just do that during the build process and the user never has to
