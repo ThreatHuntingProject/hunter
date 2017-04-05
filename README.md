@@ -28,6 +28,12 @@ To run the container for the first time, simply do:
 
 This will start a new container, which you can stop/start as you like.  _Each time you use 'make run', you'll create a new persistent container_.  Be careful not to run 'make run' more than once unless you know what you're doing.
 
+If you want to have a bit more control, try something like:
+
+> docker -it -p 8888:8888 -e GEN_CERT=yes -e PYTHONPATH=/home/jovyan/work/lib -v $HOME:/home/jovyan/work threathuntproj/hunting
+
+This is essentially the same as the _make run_ method, though it adds a PYTHONPATH variable into the runtime, creating a space where you can install your own python modules and know that they will be available to all your notebooks.  As written, the example will mount your home directory as the filesystem the notebooks see, and $HOME/lib will be the python module directory, but you can change either to fit your needs and preferences.
+
 # Accessing the Notebook Server
 By default, when the notebook server runs, it will print the UI URL to the console.  This URL contains a randomly-generated access token, which will serve instead of a password to authenticate you to the notebook server.  Click that URL, or cut-n-paste it into your browser, and you'll be logged in.
 
