@@ -1,5 +1,5 @@
-# hunter
-A standalone hunting analysis toolset in a Docker container.  Provides Jupyter notebook, visualization modules and Spark support.
+# Hunter
+A threat hunting / data analysis environment based on Python, Pandas, PySpark and Jupyter Notebook.
 
 # Prerequisites
 You will need to have Docker installed and running on your system.  
