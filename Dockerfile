@@ -21,13 +21,20 @@ RUN apt-get install --yes libfreetype6-dev
 RUN apt-get install --yes libxft-dev
 RUN apt-get install --yes libpng-dev
 
-# Switch back to the jovyan user to do pip installs or this will fail
+# Switch back to the jovyan user to do module installs or this will fail
 # due to directory ownership on the cache
 USER $NB_USER
 
 # Maybe not strictly necessary, but often a good idea to have around
 RUN conda install -y virtualenv
 RUN conda install -y --name python2 virtualenv
+
+# Update Jupyter to latest version
+# RUN conda upgrade notebook jupyterhub
+# RUN conda upgrade --name python2 notebook
+
+# Install the standard Jupyter notebook extensions
+RUN conda install jupyter_contrib_nbextensions
 
 # Basic analysis packages
 RUN conda install -y numpy
@@ -69,7 +76,3 @@ RUN /bin/bash -c 'source /opt/conda/envs/python2/bin/activate && echo 'import pl
 ADD passwd-helper.py /tmp
 ARG JUPYTER_NB_PASS
 RUN JUPYTER_NB_PASS=${JUPYTER_NB_PASS}  python /tmp/passwd-helper.py >> /home/jovyan/.jupyter/jupyter_notebook_config.py
-
-
-
-
