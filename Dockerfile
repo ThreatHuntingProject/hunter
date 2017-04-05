@@ -10,49 +10,16 @@ USER root
 # Update the list of packages so we can install what we need
 RUN apt-get update --yes
 
-# Make sure we have the necessary pieces to build Python modules
-RUN apt-get install --yes python-dev
-RUN apt-get install --yes build-essential
-
-# While we are still root, install some packages we need as prereqs for
-# python modules later
-# matplotlib prereqs
-RUN apt-get install --yes libfreetype6-dev
-RUN apt-get install --yes libxft-dev
-RUN apt-get install --yes libpng-dev
-
 # Switch back to the jovyan user to do module installs or this will fail
 # due to directory ownership on the cache
 USER $NB_USER
 
-# Maybe not strictly necessary, but often a good idea to have around
-RUN conda install -y virtualenv
-RUN conda install -y --name python2 virtualenv
-
-# Update Jupyter to latest version
-# RUN conda upgrade notebook jupyterhub
-# RUN conda upgrade --name python2 notebook
-
 # Install the standard Jupyter notebook extensions
 RUN conda install jupyter_contrib_nbextensions
-
-# Basic analysis packages
-RUN conda install -y numpy
-RUN conda install -y --name python2  numpy
-RUN conda install -y  pandas
-RUN conda install -y --name python2  pandas
 
 # Install Plot.ly for most visualization needs
 RUN conda install -y plotly
 RUN conda install -y --name python2 plotly
-
-# Matplotlib in case anyone actually wants that. ;-)
-RUN conda install -y  matplotlib
-RUN conda install -y --name python2  matplotlib
-
-# Machine learning modules
-RUN conda install -y  scikit-learn
-RUN conda install -y --name python2  scikit-learn
 
 # Elasticsearch client for Python.  The DSL (high level) version also installs
 # the standard elasticsearch-py library as a dependency, so it's available
@@ -76,3 +43,8 @@ RUN /bin/bash -c 'source /opt/conda/envs/python2/bin/activate && echo 'import pl
 ADD passwd-helper.py /tmp
 ARG JUPYTER_NB_PASS
 RUN JUPYTER_NB_PASS=${JUPYTER_NB_PASS}  python /tmp/passwd-helper.py >> /home/jovyan/.jupyter/jupyter_notebook_config.py
+
+# Add "/home/jovyan/work/lib" to the PYTHONPATH.  Since "/home/jovyan/work"
+# is typically a mounted volume, this gives the user a convenient place to
+# drop their own Python modules that will be available in all notebooks.
+ENV PYTHONPATH "/home/jovyan/work/lib:$PYTHONPATH"
