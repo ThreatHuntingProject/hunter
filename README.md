@@ -1,6 +1,15 @@
 # Hunter
 A threat hunting / data analysis environment based on Python, Pandas, PySpark and Jupyter Notebook.
 
+# Docker Image
+This repo contains all the files and instructions necessary to build your own Docker image from scratch. If you just want to *use* the hunting environment, though, I recommend using the pre-build image available on Docker Hub.  
+
+>  docker pull threathuntproj/hunting
+
+This will download the image to your local cache.  Once you've downloaded the image, skip directly to the *Running the Container* section of this README and continue from there.
+
+See [the instructions](https://hub.docker.com/r/threathuntproj/hunting/) for details.
+
 # Prerequisites
 You will need to have Docker installed and running on your system.  
 
