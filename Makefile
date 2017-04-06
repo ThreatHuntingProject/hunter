@@ -18,7 +18,7 @@ refresh:
 	docker pull jupyter/pyspark-notebook
 
 run:
-	docker run -it -p $(LOCALPORT):8888 -e GEN_CERT=yes -e PYTHONPATH=/home/jovyan/work/lib -v $(DATAVOL):/home/jovyan/work $(REPO)/$(IMAGE_NAME) 
+	docker run -it -p $(LOCALPORT):8888 -e GEN_CERT=yes -v $(DATAVOL):/home/jovyan/work $(REPO)/$(IMAGE_NAME) 
 
 push:
 	docker push $(REPO)/$(IMAGE_NAME):latest
