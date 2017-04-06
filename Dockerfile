@@ -8,7 +8,7 @@ MAINTAINER The ThreatHunting Project <project@threathunting.net>
 USER root
 
 # Update the list of packages so we can install what we need
-RUN apt-get update --yes
+RUN apt-get update --yes && apt-get clean
 
 # Switch back to the jovyan user to do module installs or this will fail
 # due to directory ownership on the cache
