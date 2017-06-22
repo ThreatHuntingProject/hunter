@@ -42,7 +42,7 @@ RUN /bin/bash -c 'source /opt/conda/envs/python2/bin/activate && echo 'import pl
 # Set the notebook default password
 ADD passwd-helper.py /tmp
 ARG JUPYTER_NB_PASS
-RUN JUPYTER_NB_PASS=${JUPYTER_NB_PASS}  python /tmp/passwd-helper.py >> /home/jovyan/.jupyter/jupyter_notebook_config.py
+RUN mkdir -p /home/jovyan/.jupyter ; JUPYTER_NB_PASS=${JUPYTER_NB_PASS}  python /tmp/passwd-helper.py >> /home/jovyan/.jupyter/jupyter_notebook_config.py
 
 # Add "/home/jovyan/work/lib" to the PYTHONPATH.  Since "/home/jovyan/work"
 # is typically a mounted volume, this gives the user a convenient place to
