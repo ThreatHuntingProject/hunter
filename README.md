@@ -39,7 +39,7 @@ This will start a new container, which you can stop/start as you like.  _Each ti
 
 If you want to have a bit more control, try something like:
 
-> docker -it -p 8888:8888 -e GEN_CERT=yes -v $HOME:/home/jovyan/work threathuntproj/hunting
+> docker run -it -p 8888:8888 -e GEN_CERT=yes -v $HOME:/home/jovyan/work threathuntproj/hunting
 
 This is essentially the same as the _make run_ method.  As written, the example will mount your home directory as the filesystem the notebooks see, but you can change this to fit your needs and preferences.
 
