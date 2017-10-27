@@ -14,8 +14,17 @@ RUN apt-get update --yes && apt-get clean
 # due to directory ownership on the cache
 USER $NB_USER
 
+# Create the Python 2.7 environment
+RUN conda create --name python2 python=2
+
+# Install the Python 2.x kernel
+RUN /opt/conda/envs/python2/bin/pip install ipykernel ; /opt/conda/envs/python2/bin/python -m ipykernel install --user
+
 # Install the standard Jupyter notebook extensions
 RUN conda install jupyter_contrib_nbextensions
+
+# Install data analysis modules
+RUN conda install -y --name python2 seaborn matplotlib pandas numpy scikit-learn 
 
 # Install Plot.ly for most visualization needs
 RUN conda install -y plotly
@@ -30,7 +39,7 @@ RUN conda install -y --name python2  elasticsearch-dsl
 # Grab the Splunk SDK as well.  Note that this seems to only support
 # python2.  Also, it's not in the conda channel, so we have to use
 # pip.
-RUN pip2 install splunk-sdk
+RUN /opt/conda/envs/python2/bin/pip install splunk-sdk
 
 # The first time you 'import plotly' on a new system, it has to build the
 # font cache.  This takes a while and also causes spurious warnings, so
