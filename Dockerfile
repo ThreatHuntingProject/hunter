@@ -23,8 +23,10 @@ RUN /opt/conda/envs/python2/bin/pip install ipykernel ; /opt/conda/envs/python2/
 # Install the standard Jupyter notebook extensions
 RUN conda install jupyter_contrib_nbextensions
 
-# Install data analysis modules
-RUN conda install -y --name python2 seaborn matplotlib pandas numpy scikit-learn 
+# Install data analysis modules. For python3, these are installed by default
+# so we just make sure they are the latest versions.
+RUN conda upgrade -y seaborn matplotlib pandas numpy scikit-learn
+RUN conda install -y --name python2 seaborn matplotlib pandas numpy scikit-learn
 
 # Install Plot.ly for most visualization needs
 RUN conda install -y plotly
@@ -40,6 +42,10 @@ RUN conda install -y --name python2  elasticsearch-dsl
 # python2.  Also, it's not in the conda channel, so we have to use
 # pip.
 RUN /opt/conda/envs/python2/bin/pip install splunk-sdk
+
+# Install featuretools module, for automatic feature extraction in datasets
+RUN pip install featuretools
+RUN /opt/conda/envs/python2/bin/pip install featuretools
 
 # The first time you 'import plotly' on a new system, it has to build the
 # font cache.  This takes a while and also causes spurious warnings, so
