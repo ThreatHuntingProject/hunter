@@ -14,6 +14,9 @@ RUN apt-get update --yes && apt-get clean
 # due to directory ownership on the cache
 USER $NB_USER
 
+# Update anaconda to latest version
+RUN conda update -y -n base conda
+
 # Create the Python 2.7 environment
 RUN conda create --name python2 python=2
 
@@ -51,8 +54,8 @@ RUN /opt/conda/envs/python2/bin/pip install featuretools
 # font cache.  This takes a while and also causes spurious warnings, so
 # we can just do that during the build process and the user never has to
 # see it.
-RUN /bin/bash -c 'source /opt/conda/bin/activate && echo 'import plotly' | python -'
-RUN /bin/bash -c 'source /opt/conda/envs/python2/bin/activate && echo 'import plotly' | python -'
+RUN /opt/conda/bin/python -c 'import plotly'
+RUN /opt/conda/envs/python2/bin/python -c 'import plotly'
 
 # Set the notebook default password
 ADD passwd-helper.py /tmp
