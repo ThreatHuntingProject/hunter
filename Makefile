@@ -12,13 +12,13 @@ DATAVOL=$(HOME)
 LOCALPORT=8888
 
 build:	Dockerfile refresh
-	docker build --no-cache --build-arg JUPYTER_NB_PASS=$$JUPYTER_NB_PASS -t $(REPO)/$(IMAGE_NAME):latest -t $(REPO)/$(IMAGE_NAME):$(DATE) .
+	docker build --build-arg JUPYTER_NB_PASS=$$JUPYTER_NB_PASS -t $(REPO)/$(IMAGE_NAME):latest -t $(REPO)/$(IMAGE_NAME):$(DATE) .
 
 refresh:
 	docker pull jupyter/pyspark-notebook
 
 run:
-	docker run -it -p $(LOCALPORT):8888 -e GEN_CERT=yes -v $(DATAVOL):/home/jovyan/work $(REPO)/$(IMAGE_NAME) 
+	docker run -it -p $(LOCALPORT):8888 -e GEN_CERT=yes -v $(DATAVOL):/home/jovyan/work $(REPO)/$(IMAGE_NAME)
 
 push:
 	docker push $(REPO)/$(IMAGE_NAME):latest
