@@ -1,5 +1,5 @@
 # Hunter
-A threat hunting / data analysis environment based on Python, Pandas, PySpark and Jupyter Notebook.
+A threat hunting / data analysis environment based on Python, Pandas, PySpark and Jupyter Notebook. Supports both the traditional Jupyter Notebook and the new Jupyter Lab environment.
 
 # Docker Image
 This repo contains all the files and instructions necessary to build your own Docker image from scratch. If you just want to *use* the hunting environment, though, I recommend using the pre-build image available on Docker Hub.  
@@ -35,18 +35,28 @@ To run the container for the first time, simply do:
 
 > make run
 
-This will start a new container, which you can stop/start as you like.  _Each time you use 'make run', you'll create a new persistent container_.  Be careful not to run 'make run' more than once unless you know what you're doing.
+This will start a new container with the Jupyter Notebook interface, which you can stop/start as you like.  
+
+If you prefer the Jupyter Lab interface, just do:
+
+> make run-lab
+
+_Each time you use `make run` or `make run-lab`, you'll create a new persistent container_.  Be careful not to run 'make run' more than once unless you know what you're doing.
 
 If you want to have a bit more control, try something like:
 
 > docker run -it -p 8888:8888 -e GEN_CERT=yes -v $HOME:/home/jovyan/work threathuntproj/hunting
 
-This is essentially the same as the _make run_ method.  As written, the example will mount your home directory as the filesystem the notebooks see, but you can change this to fit your needs and preferences.
+This is essentially the same as the _make run_ method.  As written, the example will mount your home directory as the filesystem the notebooks see, but you can change this to fit your needs and preferences. To do the same with Jupyter Lab, just set the `JUPYTER_ENABLE_LAB` environment variable in the container, like so:
+
+> docker run -it -p $(LOCALPORT):8888 -e GEN_CERT=yes -e JUPYTER_ENABLE_LAB=yes -v $(DATAVOL):/home/jovyan/work $(REPO)/$(IMAGE_NAME)
+
+## Adding Custom Python Libraries
 
 As a special feature, the image adds _/home/jovyan/work/lib_ to the PYTHONPATH in the container.  This is especially handy when you mount _/home/jovyan/work_ as a volume, as in the example above.  If you install a python module into that _lib_ directory, your notebooks will automatically be able to find it when they're running in the container.  This provides a convenient way for you to add your own modules without having to rebuild the entire image.
 
-# Accessing the Notebook Server
-By default, when the notebook server runs, it will print the UI URL to the console.  This URL contains a randomly-generated access token, which will serve instead of a password to authenticate you to the notebook server.  Click that URL, or cut-n-paste it into your browser, and you'll be logged in.
+# Accessing the Jupyter Environment
+By default, when the container runs, it will print the UI URL to the console.  This URL contains a randomly-generated access token, which will serve instead of a password to authenticate you to the Jupyter server.  Click that URL, or cut-n-paste it into your browser, and you'll be logged in.
 
 If you've set a password at build time (via the JUPYTER_NB_PASS variable), then there will be no default URL.  Instead, just browse to _https://localhost:8888_.
 
