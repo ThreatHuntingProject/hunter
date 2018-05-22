@@ -1,6 +1,6 @@
 DATE=`date '+%Y%m%d'`
-REPO="threathuntproj"
-IMAGE_NAME="hunting"
+REPO=threathuntproj
+IMAGE_NAME=hunting
 
 # Point this to the full path of a directory you want to mount as your "work"
 # volume inside the container.  This will become "/home/jovyan/work" (Jupyter
@@ -19,6 +19,9 @@ refresh:
 
 run:
 	docker run -it -p $(LOCALPORT):8888 -e GEN_CERT=yes -v $(DATAVOL):/home/jovyan/work $(REPO)/$(IMAGE_NAME)
+
+run-lab:
+	docker run -it -p $(LOCALPORT):8888 -e GEN_CERT=yes -e JUPYTER_ENABLE_LAB=yes -v $(DATAVOL):/home/jovyan/work $(REPO)/$(IMAGE_NAME)
 
 push:
 	docker push $(REPO)/$(IMAGE_NAME):latest

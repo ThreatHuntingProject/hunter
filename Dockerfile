@@ -21,7 +21,7 @@ RUN conda update -y -n base conda
 RUN conda create --name python2 python=2
 
 # Install the Python 2.x kernel
-RUN /opt/conda/envs/python2/bin/pip install ipykernel ; /opt/conda/envs/python2/bin/python -m ipykernel install --user
+RUN /opt/conda/envs/python2/bin/pip install ipykernel && /opt/conda/envs/python2/bin/python -m ipykernel install --user
 
 # Install the standard Jupyter notebook extensions
 RUN conda install jupyter_contrib_nbextensions
