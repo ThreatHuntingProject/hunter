@@ -17,6 +17,9 @@ build:	Dockerfile refresh
 refresh:
 	docker pull jupyter/pyspark-notebook
 
+test:
+	docker run -it -p $(LOCALPORT):8888 -e GEN_CERT=yes -v `pwd`:/home/jovyan $(REPO)/$(IMAGE_NAME)
+
 run:
 	docker run -it -p $(LOCALPORT):8888 -e GEN_CERT=yes -v $(DATAVOL):/home/jovyan/work $(REPO)/$(IMAGE_NAME)
 
