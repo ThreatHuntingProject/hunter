@@ -1,5 +1,22 @@
 # Hunter
-A threat hunting / data analysis environment based on Python, Pandas, PySpark and Jupyter Notebook. Supports both the traditional Jupyter Notebook and the new Jupyter Lab environment.
+A threat hunting / data analysis environment based on Python, Pandas, PySpark and Jupyter Notebook. 
+
+The following is a partial list of the major features:
+
+* Support for either the traditional Notebook or the new Lab interface
+* Built-in extensions manager for the Notebook interface
+* Python 3 (default) and Python 2 kernels
+* Preinstalled libraries useful data search, analysis and visualization, including
+  * elasticsearch-dsl
+  * splunk-sdk
+  * pandas
+  * pyspark
+  * numpy
+  * matplotlib
+  * seaborn
+  * plotly (with cufflinks support)
+  * scikit-learn
+  * ipywidgets
 
 # Docker Image
 This repo contains all the files and instructions necessary to build your own Docker image from scratch. If you just want to *use* the hunting environment, though, I recommend using the pre-build image available on Docker Hub.  
