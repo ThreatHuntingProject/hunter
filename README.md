@@ -1,12 +1,12 @@
 # Hunter
-A threat hunting / data analysis environment based on Python, Pandas, PySpark and Jupyter Notebook. 
+A threat hunting / data analysis environment based on Python, Pandas, PySpark and Jupyter Notebook.
 
 The following is a partial list of the major features:
 
 * Support for either the traditional Notebook or the new Lab interface
 * Built-in extensions manager for the Notebook interface
 * Python 3 (default) and Python 2 kernels
-* Preinstalled libraries useful data search, analysis and visualization, including
+* Preinstalled libraries useful for data search, analysis and visualization, including
   * elasticsearch-dsl
   * splunk-sdk
   * pandas
