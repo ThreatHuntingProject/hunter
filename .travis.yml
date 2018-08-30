@@ -9,6 +9,10 @@ global:
   - JUPYTER_NB_PASS=""
 
 script:
+  - echo $DATE
+  - echo $REPO
+  - echo $IMAGE_NAME
+  - echo $JUPYTER_NB_PASS
   - docker build --build-arg JUPYTER_NB_PASS=$JUPYTER_NB_PASS -t $REPO/$IMAGE_NAME:latest .
 
 after_script:
