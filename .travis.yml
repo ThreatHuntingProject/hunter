@@ -9,8 +9,7 @@ global:
   - JUPYTER_NB_PASS=""
 
 script:
-  - docker pull threathuntproj/hunting:latest || true
-  - docker build --pull --cache-from threathuntproj/hunting:latest . 
+  - docker build --build-arg JUPYTER_NB_PASS=$JUPYTER_NB_PASS .
 
 after_script:
   - docker images
