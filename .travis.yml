@@ -29,8 +29,6 @@ before_deploy:
 
 deploy:
   provider: script
-  script:
-    - echo "Would deploy $REPO/$IMAGE_NAME:latest"
+  script: bash -c 'echo Would deploy $REPO/$IMAGE_NAME:latest'
   on:
     branch: travisci
-    condition: $REPO = threathuntproj
