@@ -9,6 +9,9 @@ env:
     - IMAGE_NAME="hunting-travistest"
     - JUPYTER_NB_PASS=""
 
+before_script:
+  - docker pull $REPO/$IMAGE_NAME:latest || true
+
 script:
   - docker build --pull --cache-from $REPO/$IMAGE_NAME:latest --build-arg JUPYTER_NB_PASS=$JUPYTER_NB_PASS -t $REPO/$IMAGE_NAME:latest -t $REPO/$IMAGE_NAME:$DATE .
 
