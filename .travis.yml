@@ -4,7 +4,7 @@ services:
 
 env:
   global:
-    - DATE=$(date '+%Y%m%d').$TRAVIS_BUILD_NUMBER 
+    - DATE=$(date '+%Y%m%d')
     - REPO="threathuntproj"
     - IMAGE_NAME="hunting"
     - JUPYTER_NB_PASS=""
@@ -15,14 +15,14 @@ before_script:
   - docker images
 
 script:
-  - docker build --pull --cache-from $REPO/$IMAGE_NAME:latest --build-arg JUPYTER_NB_PASS=$JUPYTER_NB_PASS -t $REPO/$IMAGE_NAME:latest .
+  - docker build --pull --cache-from $REPO/$IMAGE_NAME:latest --build-arg JUPYTER_NB_PASS=$JUPYTER_NB_PASS -t $REPO/$IMAGE_NAME:$DATE.$TRAVIS_BUILD_NUMBER .
   - docker images
-  - docker run -v `pwd`:/home/jovyan/work $REPO/$IMAGE_NAME:latest jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --output /tmp/testoutput-py3.ipynb /home/jovyan/work/Test.ipynb
-  - docker run -v `pwd`:/home/jovyan/work $REPO/$IMAGE_NAME:latest jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --ExecutePreprocessor.kernel_name=python2 --output /tmp/testoutput-py2.ipynb /home/jovyan/work/Test.ipynb
+  - docker run -v `pwd`:/home/jovyan/work $REPO/$IMAGE_NAME:$DATE.$TRAVIS_BUILD_NUMBER jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --output /tmp/testoutput-py3.ipynb /home/jovyan/work/Test.ipynb
+  - docker run -v `pwd`:/home/jovyan/work $REPO/$IMAGE_NAME:$DATE.$TRAVIS_BUILD_NUMBER jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --ExecutePreprocessor.kernel_name=python2 --output /tmp/testoutput-py2.ipynb /home/jovyan/work/Test.ipynb
   - docker images
 
 before_deploy:
-  - docker tag $REPO/$IMAGE_NAME $REPO/$IMAGE_NAME:latest
+  - docker tag $REPO/$IMAGE_NAME:$DATE.$TRAVIS_BUILD_NUMBER $REPO/$IMAGE_NAME:latest
   - docker tag $REPO/$IMAGE_NAME $REPO/$IMAGE_NAME:$DATE
   - docker images
   - echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
