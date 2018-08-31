@@ -19,14 +19,13 @@ script:
   - docker images
   - docker run -v `pwd`:/home/jovyan/work $REPO/$IMAGE_NAME:latest jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --output /tmp/testoutput-py3.ipynb /home/jovyan/work/Test.ipynb
   - docker run -v `pwd`:/home/jovyan/work $REPO/$IMAGE_NAME:latest jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --ExecutePreprocessor.kernel_name=python2 --output /tmp/testoutput-py2.ipynb /home/jovyan/work/Test.ipynb
-
-after_script:
   - docker images
 
 before_deploy:
   - docker tag $REPO/$IMAGE_NAME $REPO/$IMAGE_NAME:latest
   - docker tag $REPO/$IMAGE_NAME $REPO/$IMAGE_NAME:$DATE
-  - docker login -u "$DOCKERHUB_USER" -p "$DOCKERHUB_PASS"
+  - docker images
+  - echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
 
 deploy:
   provider: script
@@ -34,3 +33,4 @@ deploy:
     - echo "Would deploy $REPO/$IMAGE_NAME:latest"
   on:
     branch: travisci
+    condition: $REPO = threathuntproj
