@@ -4,7 +4,7 @@ services:
 
 env:
   global:
-    - DATE=$(date '+%Y%m%d').$TRAVIS_BUILD_NUMBER
+    - DATE=$(date '+%Y%m%d').$TRAVIS_BUILD_NUMBER 
     - REPO="threathuntproj"
     - IMAGE_NAME="hunting"
     - JUPYTER_NB_PASS=""
