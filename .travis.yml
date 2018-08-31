@@ -29,6 +29,6 @@ before_deploy:
 
 deploy:
   provider: script
-  script: bash -c 'echo Would deploy $REPO/$IMAGE_NAME:latest'
+  script: deploy.sh
   on:
     branch: travisci
