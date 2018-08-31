@@ -10,11 +10,16 @@ env:
     - JUPYTER_NB_PASS=""
 
 before_script:
-  - docker pull $REPO/$IMAGE_NAME:latest || true
+  - docker version
+  - docker pull $REPO/$IMAGE_NAME:latest
   - docker images
 
 script:
-  - docker build --pull --cache-from $REPO/$IMAGE_NAME:latest --build-arg JUPYTER_NB_PASS=$JUPYTER_NB_PASS -t $REPO/$IMAGE_NAME:latest -t $REPO/$IMAGE_NAME:$DATE .
+  - docker build --pull --cache-from $REPO/$IMAGE_NAME:latest --build-arg JUPYTER_NB_PASS=$JUPYTER_NB_PASS -t $REPO/$IMAGE_NAME .
 
 after_script:
   - docker images
+
+before_deploy:
+  - docker tag $REPO/$IMAGE_NAME $REPO/$IMAGE_NAME:latest
+  - docker tag $REPO/$IMAGE_NAME $REPO/$IMAGE_NAME:$DATE
