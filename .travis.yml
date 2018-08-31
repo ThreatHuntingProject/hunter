@@ -9,12 +9,14 @@ env:
     - IMAGE_NAME="hunting-travistest"
     - JUPYTER_NB_PASS=""
 
+before_script:
+
 script:
   - echo ${DATE}
   - echo ${REPO}
   - echo ${IMAGE_NAME}
   - echo ${JUPYTER_NB_PASS}
-  - docker build --build-arg JUPYTER_NB_PASS=$JUPYTER_NB_PASS -t $REPO/$IMAGE_NAME:latest .
+  - docker build --build-arg JUPYTER_NB_PASS=$JUPYTER_NB_PASS -t $REPO/$IMAGE_NAME:latest -t $REPO/$IMAGE_NAME:$DATE .
 
 after_script:
   - docker images
