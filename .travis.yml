@@ -15,7 +15,9 @@ before_script:
   - docker images
 
 script:
-  - docker build --pull --cache-from $REPO/$IMAGE_NAME:latest --build-arg JUPYTER_NB_PASS=$JUPYTER_NB_PASS -t $REPO/$IMAGE_NAME .
+  - docker build --pull --cache-from $REPO/$IMAGE_NAME:latest --build-arg JUPYTER_NB_PASS=$JUPYTER_NB_PASS -t $REPO/$IMAGE_NAME:latest .
+  - docker run -v `pwd`:/home/jovyan/work $REPO/$IMAGE_NAME:latest jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --output /home/jovyan/work/testoutput-py3.ipynb /home/jovyan/work/Test.ipynb
+  - docker run -v `pwd`:/home/jovyan/work $REPO/$IMAGE_NAME:latest jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --ExecutePreprocessor.kernel_name=python2 --output /home/jovyan/work/testoutput-py2.ipynb /home/jovyan/work/Test.ipynb
 
 after_script:
   - docker images
@@ -23,3 +25,6 @@ after_script:
 before_deploy:
   - docker tag $REPO/$IMAGE_NAME $REPO/$IMAGE_NAME:latest
   - docker tag $REPO/$IMAGE_NAME $REPO/$IMAGE_NAME:$DATE
+
+deploy:
+  - echo "Would deploy $REPO/$IMAGE_NAME:latest"
