@@ -14,7 +14,7 @@ build:	Dockerfile refresh
 	docker build --build-arg JUPYTER_NB_PASS=$$JUPYTER_NB_PASS -t $(REPO)/$(IMAGE_NAME):dev .
 
 refresh:
-	docker pull jupyter/pyspark-notebook
+	docker pull jupyter/pyspark-notebook 
 
 test:
 	@echo "\n************************"
