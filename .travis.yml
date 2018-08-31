@@ -2,11 +2,12 @@ sudo: required
 services:
   - docker
 
-global:
-  - DATE=$(date '+%Y%m%d')
-  - REPO="threathuntproj"
-  - IMAGE_NAME="hunting-travistest"
-  - JUPYTER_NB_PASS=""
+env:
+  global:
+    - DATE=$(date '+%Y%m%d')
+    - REPO="threathuntproj"
+    - IMAGE_NAME="hunting-travistest"
+    - JUPYTER_NB_PASS=""
 
 script:
   - echo ${DATE}
