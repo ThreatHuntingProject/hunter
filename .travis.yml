@@ -10,7 +10,6 @@ env:
     - JUPYTER_NB_PASS=""
 
 before_script:
-  - docker version
   - docker pull $REPO/$IMAGE_NAME:latest
   - docker images
 
