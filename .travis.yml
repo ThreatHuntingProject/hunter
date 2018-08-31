@@ -15,7 +15,7 @@ before_script:
   - docker images
 
 script:
-#  - docker build --pull --cache-from $REPO/$IMAGE_NAME:latest --build-arg JUPYTER_NB_PASS=$JUPYTER_NB_PASS -t $REPO/$IMAGE_NAME:latest .
+  - docker build --pull --cache-from $REPO/$IMAGE_NAME:latest --build-arg JUPYTER_NB_PASS=$JUPYTER_NB_PASS -t $REPO/$IMAGE_NAME:latest .
   - docker images
   - docker run -v `pwd`:/home/jovyan/work $REPO/$IMAGE_NAME:latest jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --output /tmp/testoutput-py3.ipynb /home/jovyan/work/Test.ipynb
   - docker run -v `pwd`:/home/jovyan/work $REPO/$IMAGE_NAME:latest jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --ExecutePreprocessor.kernel_name=python2 --output /tmp/testoutput-py2.ipynb /home/jovyan/work/Test.ipynb
