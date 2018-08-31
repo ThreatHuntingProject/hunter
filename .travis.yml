@@ -6,7 +6,7 @@ env:
   global:
     - DATE=$(date '+%Y%m%d')
     - REPO="threathuntproj"
-    - IMAGE_NAME="hunting-travistest"
+    - IMAGE_NAME="hunting"
     - JUPYTER_NB_PASS=""
 
 before_script:
