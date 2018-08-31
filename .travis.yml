@@ -27,4 +27,5 @@ before_deploy:
   - docker tag $REPO/$IMAGE_NAME $REPO/$IMAGE_NAME:$DATE
 
 deploy:
-  - echo "Would deploy $REPO/$IMAGE_NAME:latest"
+  script:
+    - echo "Would deploy $REPO/$IMAGE_NAME:latest"
