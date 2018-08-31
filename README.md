@@ -1,6 +1,8 @@
 # Hunter
 A threat hunting / data analysis environment based on Python, Pandas, PySpark and Jupyter Notebook.
 
+[![Build Status](https://travis-ci.com/ThreatHuntingProject/hunter.svg?branch=master)](https://travis-ci.com/ThreatHuntingProject/hunter)
+
 The following is a partial list of the major features:
 
 * Support for either the traditional Notebook or the new Lab interface
