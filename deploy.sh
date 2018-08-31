@@ -1,4 +1,4 @@
-#!/bin/#!/usr/bin/env bash
+#!/bin/bash
 
 # Simple script called by Travis CI to push the Docker images we just built to
 # Docker hub.
