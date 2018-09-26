@@ -18,13 +18,16 @@ RUN conda update -y -n base conda && conda create --name python2 python=2
 RUN /opt/conda/envs/python2/bin/pip install ipykernel && /opt/conda/envs/python2/bin/python -m ipykernel install --user
 
 # Install Python packages.
-ENV INSTALL_PACKAGES_CONDA plotly elasticsearch-dsl seaborn scikit-learn ipywidgets 
+ENV INSTALL_PACKAGES_CONDA plotly elasticsearch-dsl seaborn scikit-learn ipywidgets
 ENV INSTALL_PACKAGES_PIP splunk-sdk featuretools cufflinks>=0.14.4
 
 RUN conda install -y jupyter_contrib_nbextensions ${INSTALL_PACKAGES_CONDA} && \
     conda install -y --name python2 ${INSTALL_PACKAGES_CONDA} && \
     pip install ${INSTALL_PACKAGES_PIP} && \
     /opt/conda/envs/python2/bin/pip install ${INSTALL_PACKAGES_PIP}
+
+# Set up some useful Jupyter Lab extensions
+RUN jupyter labextension install @jupyterlab/plotly-extension @jupyterlab/toc
 
 # The first time you 'import plotly' on a new system, it has to build the
 # font cache.  This takes a while and also causes spurious warnings, so
