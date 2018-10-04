@@ -18,8 +18,8 @@ RUN conda update -y -n base conda && conda create --name python2 python=2
 RUN /opt/conda/envs/python2/bin/pip install ipykernel && /opt/conda/envs/python2/bin/python -m ipykernel install --user
 
 # Install Python packages.
-ENV INSTALL_PACKAGES_CONDA plotly elasticsearch-dsl seaborn scikit-learn ipywidgets
-ENV INSTALL_PACKAGES_PIP splunk-sdk featuretools cufflinks>=0.14.4
+ENV INSTALL_PACKAGES_CONDA plotly elasticsearch-dsl seaborn scikit-learn ipywidgets tqdm
+ENV INSTALL_PACKAGES_PIP splunk-sdk featuretools cufflinks>=0.14.4 huntlib
 
 RUN conda install -y jupyter_contrib_nbextensions ${INSTALL_PACKAGES_CONDA} && \
     conda install -y --name python2 ${INSTALL_PACKAGES_CONDA} && \

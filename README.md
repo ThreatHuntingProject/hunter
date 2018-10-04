@@ -19,6 +19,8 @@ The following is a partial list of the major features:
   * plotly (with cufflinks support)
   * scikit-learn
   * ipywidgets
+  * huntlib
+  * tqdm
 
 # Docker Image
 This repo contains all the files and instructions necessary to build your own Docker image from scratch. If you just want to *use* the hunting environment, though, I recommend using the pre-build image available on Docker Hub.  
