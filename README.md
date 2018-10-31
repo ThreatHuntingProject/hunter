@@ -81,4 +81,4 @@ By default, when the container runs, it will print the UI URL to the console.  T
 
 If you've set a password at build time (via the JUPYTER_NB_PASS variable), then there will be no default URL.  Instead, just browse to _https://localhost:8888_.
 
-**NOTE: This image uses SSL, so all access URLs must start with _https://_.**
+**NOTE: This image uses SSL, so all access URLs must start with _https://_.** 
