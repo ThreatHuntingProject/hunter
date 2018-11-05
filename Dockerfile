@@ -26,6 +26,11 @@ RUN conda install -y jupyter_contrib_nbextensions ${INSTALL_PACKAGES_CONDA} && \
     pip install ${INSTALL_PACKAGES_PIP} && \
     /opt/conda/envs/python2/bin/pip install ${INSTALL_PACKAGES_PIP}
 
+# Set up some Jupyter Notebook extensions
+RUN jupyter nbextension enable toc2/main && \
+  jupyter nbextension enable execute_time/ExecuteTime && \
+  jupyter nbextension enable python-markdown/main
+
 # Set up some useful Jupyter Lab extensions
 RUN jupyter labextension install @jupyterlab/plotly-extension @jupyterlab/toc
 
