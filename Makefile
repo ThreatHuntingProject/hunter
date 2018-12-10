@@ -25,7 +25,7 @@ test:
 	docker run -v `pwd`:/home/jovyan/work $(REPO)/$(IMAGE_NAME):dev jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --ExecutePreprocessor.kernel_name=python2 --output /tmp/testoutput-py2.ipynb /home/jovyan/work/Test.ipynb
 
 run:
-	docker run -it -p $(LOCALPORT):8888 -e GEN_CERT=yes -v $(DATAVOL):/home/jovyan/work $(REPO)/$(IMAGE_NAME):dev
+	docker run -it -p $(LOCALPORT):8888 --user root -e GRANT_SUDO=yes -e GEN_CERT=yes -v $(DATAVOL):/home/jovyan/work $(REPO)/$(IMAGE_NAME):dev
 
 run-lab:
-	docker run -it -p $(LOCALPORT):8888 -e GEN_CERT=yes -e JUPYTER_ENABLE_LAB=yes -v $(DATAVOL):/home/jovyan/work $(REPO)/$(IMAGE_NAME):dev
+	docker run -it -p $(LOCALPORT):8888 --user root -e GRANT_SUDO=yes -e GEN_CERT=yes -e JUPYTER_ENABLE_LAB=yes -v $(DATAVOL):/home/jovyan/work $(REPO)/$(IMAGE_NAME):dev
