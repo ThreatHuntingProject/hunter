@@ -4,15 +4,12 @@ FROM jupyter/pyspark-notebook:latest
 # But if it all breaks, blame us instead
 MAINTAINER The ThreatHunting Project <project@threathunting.net>
 
-# Set user to run these commands as root
-USER root
-
 # Switch back to the jovyan user to do module installs or this will fail
 # due to directory ownership on the cache
 USER $NB_USER
 
-# Update anaconda to latest version, create a python2 environment
-RUN conda update -y -n base conda && conda create --name python2 python=2
+# Create a python2 environment
+RUN conda create --name python2 python=2
 
 # Install the Python 2.x kernel
 RUN /opt/conda/envs/python2/bin/pip install ipykernel && /opt/conda/envs/python2/bin/python -m ipykernel install --user
