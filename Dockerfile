@@ -12,11 +12,12 @@ ARG NB_GID="100"
 ENV NB_USER=${NB_USER} \
     NB_UID=${NB_UID} \
     NB_GID=${NB_GID} \
-    CONDA_DIR=/opt/conda \
+    CONDA_PARENT_DIR=/opt \
     HOME=/home/${NB_USER} \
     NODE_INSTALL_URL=https://deb.nodesource.com/setup_10.x \
     CONDA_INSTALL_URL=https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
+ENV CONDA_DIR=${CONDA_PARENT_DIR}/conda
 ENV PATH=${CONDA_DIR}/bin:${PATH}
 
 # Set user to run these commands as root
@@ -51,10 +52,14 @@ RUN mkdir /home/${NB_USER}/work && \
 RUN curl -sL ${NODE_INSTALL_URL} | bash - && \
     apt-get install -y nodejs
 
-# Prepare for the conda installation
-RUN mkdir ${CONDA_DIR} && \
+# Prepare for the conda installation. Conda seems to want to create tmp files at the same 
+# level as CONDA_DIR (e.g., '/tmp/condac0fj4ty'), so we need to make sure the jovyan
+# user can also write there.
+RUN mkdir -p ${CONDA_DIR} && \
     chown ${NB_USER} ${CONDA_DIR} && \
-    chgrp ${NB_GID} ${CONDA_DIR}
+    chgrp ${NB_GID} ${CONDA_DIR} && \
+    chgrp ${NB_GID} ${CONDA_PARENT_DIR} && \
+    chmod g+rwx ${CONDA_PARENT_DIR}
 
 USER ${NB_USER}
 
