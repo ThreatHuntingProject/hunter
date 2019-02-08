@@ -2,7 +2,7 @@
 FROM debian:stable-slim as hunterbase
 
 # But if it all breaks, blame us instead
-MAINTAINER The ThreatHunting Project <project@threathunting.net>
+LABEL maintainer="The ThreatHunting Project <project@threathunting.net>"
 
 # Set the defaults for the notebook user & group
 ARG NB_USER="jovyan"
@@ -108,7 +108,7 @@ USER ${NB_USER}
 ###############################################################################
 FROM hunterbase as hunter
 
-MAINTAINER The ThreatHunting Project <project@threathunting.net>
+LABEL maintainer="The ThreatHunting Project <project@threathunting.net>"
 
 ENV CONDA_DIR=/opt/conda
 ENV PATH=${CONDA_DIR}/bin:${PATH}
@@ -194,7 +194,7 @@ ENV PYTHONPATH "/home/jovyan/work/lib:$PYTHONPATH"
 #
 FROM hunter as sparkhunter
 
-MAINTAINER The ThreatHunting Project <project@threathunting.net>
+LABEL maintainer="The ThreatHunting Project <project@threathunting.net>"
 
 # Do the entire thing as root
 USER root
