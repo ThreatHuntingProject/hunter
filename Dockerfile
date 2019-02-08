@@ -32,6 +32,7 @@ ENV INSTALL_PACKAGES bzip2 \
                      locales \
                      software-properties-common \
                      sudo \
+                     texlive-xetex \
                      wget
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y ${INSTALL_PACKAGES}
