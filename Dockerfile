@@ -206,7 +206,7 @@ USER root
 
 ENV NB_USER=jovyan \
     CONDA_DIR=/opt/conda \
-    SPARK_VERSION=2.4.0 \
+    SPARK_VERSION=2.4.3 \
     HADOOP_VERSION=2.7
 
 ENV PATH=${CONDA_DIR}/bin:${PATH}
@@ -228,7 +228,7 @@ RUN apt-get update && \
     apt-get install -y ${INSTALL_PACKAGES}
 
 RUN cd /tmp && \
-        wget -q http://mirrors.ukfast.co.uk/sites/ftp.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && \
+        wget -q https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && \
         tar xzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz -C /usr/local --owner root --group root --no-same-owner && \
         rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
 RUN cd /usr/local && ln -s spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} spark
