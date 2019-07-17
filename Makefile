@@ -18,10 +18,12 @@ refresh:
 
 test:
 	@echo "\n************************"
-	@echo "Testing with Python 3..."
+	@echo "Testing basic functionality with Python 3..."
 	docker run -v `pwd`:/home/jovyan/work $(REPO)/$(IMAGE_NAME):dev jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --output /tmp/testoutput-py3.ipynb /home/jovyan/work/Test.ipynb
+	@echo "Testing Apache Spark support with Python 3..."
+	docker run -v `pwd`:/home/jovyan/work $(REPO)/$(IMAGE_NAME):dev jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --output /tmp/testoutput-spark-py3.ipynb /home/jovyan/work/Test-spark.ipynb
 	@echo "\n************************"
-	@echo "Testing with Python 2..."
+	@echo "Testing basic functionality with Python 2..."
 	docker run -v `pwd`:/home/jovyan/work $(REPO)/$(IMAGE_NAME):dev jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --ExecutePreprocessor.kernel_name=python2 --output /tmp/testoutput-py2.ipynb /home/jovyan/work/Test.ipynb
 
 run:
