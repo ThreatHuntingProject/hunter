@@ -1,5 +1,5 @@
 # We're built on the official Python 3 "slim" image
-FROM debian:stable-slim as hunterbase
+FROM debian:stretch-slim as hunterbase
 
 # But if it all breaks, blame us instead
 LABEL maintainer="The ThreatHunting Project <project@threathunting.net>"
@@ -81,7 +81,7 @@ RUN conda install tini
 RUN conda install notebook jupyterhub jupyterlab
 
 # Configure Jupyter
-RUN jupyter labextension install @jupyterlab/hub-extension@^0.12.0 && \
+RUN jupyter labextension install @jupyterlab/hub-extension && \
     npm cache clean --force
 
 RUN jupyter notebook --generate-config
@@ -167,8 +167,8 @@ RUN jupyter nbextension enable toc2/main && \
 # Set up some useful Jupyter Lab extensions
 RUN jupyter labextension install @jupyterlab/plotly-extension \
                                  @jupyterlab/toc \
-                                 @jupyter-widgets/jupyterlab-manager@^0.38.1 \
-                                 jupyterlab_bokeh@0.6.3 && \
+                                 @jupyter-widgets/jupyterlab-manager \
+                                 jupyterlab_bokeh && \
     npm cache clean --force && \
     rm -rf ${CONDA_DIR}/share/jupyter/lab/staging && \
     rm -rf /home/${NB_USER}/.cache/yarn && \
