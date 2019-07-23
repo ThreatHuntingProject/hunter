@@ -16,7 +16,7 @@ RUN /opt/conda/envs/python2/bin/pip install ipykernel && /opt/conda/envs/python2
 
 # Install Python packages.
 ENV INSTALL_PACKAGES_CONDA plotly elasticsearch-dsl seaborn scikit-learn ipywidgets tqdm requests
-ENV INSTALL_PACKAGES_PIP splunk-sdk cufflinks>=0.14.4 huntlib
+ENV INSTALL_PACKAGES_PIP splunk-sdk huntlib
 
 RUN conda install -y jupyter_contrib_nbextensions ${INSTALL_PACKAGES_CONDA} && \
     conda install -y --name python2 ${INSTALL_PACKAGES_CONDA} && \
