@@ -28,3 +28,4 @@ run:
 
 run-lab:
 	docker run -it -p $(LOCALPORT):8888 --user root -e GRANT_SUDO=yes -e GEN_CERT=yes -e JUPYTER_ENABLE_LAB=yes -v $(DATAVOL):/home/jovyan/work $(REPO)/$(IMAGE_NAME):dev
+
