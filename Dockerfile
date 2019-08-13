@@ -2,7 +2,7 @@
 FROM jupyter/pyspark-notebook:latest
 
 # But if it all breaks, blame us instead
-MAINTAINER The ThreatHunting Project <project@threathunting.net>
+LABEL maintainer="The ThreatHunting Project <project@threathunting.net>"
 
 # Switch back to the jovyan user to do module installs or this will fail
 # due to directory ownership on the cache

@@ -20,7 +20,7 @@ script:
   - docker build --pull --build-arg JUPYTER_NB_PASS=$JUPYTER_NB_PASS -t $REPO/$IMAGE_NAME:$DATE.$TRAVIS_BUILD_NUMBER .
   - docker images
   - docker run -v `pwd`:/home/jovyan/work $REPO/$IMAGE_NAME:$DATE.$TRAVIS_BUILD_NUMBER jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --output /tmp/testoutput-py3.ipynb /home/jovyan/work/Test.ipynb
-  - docker run -v `pwd`:/home/jovyan/work $REPO/$IMAGE_NAME:$DATE.$TRAVIS_BUILD_NUMBER jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --ExecutePreprocessor.kernel_name=python2 --output /tmp/testoutput-py2.ipynb /home/jovyan/work/Test.ipynb
+  - docker run -v `pwd`:/home/jovyan/work $REPO/$IMAGE_NAME:$DATE.$TRAVIS_BUILD_NUMBER jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 --output /tmp/testoutput-spark-py3.ipynb /home/jovyan/work/Test-spark.ipynb
   - docker images
 
 before_deploy:
