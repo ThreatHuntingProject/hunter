@@ -21,7 +21,7 @@ RUN jupyter nbextension enable toc2/main && \
   jupyter nbextension enable python-markdown/main
 
 # Set up some useful Jupyter Lab extensions
-RUN jupyter labextension install @jupyterlab/plotly-extension @jupyterlab/toc
+RUN jupyter labextension install jupyterlab-plotly  @jupyterlab/toc
 
 # The first time you 'import plotly' on a new system, it has to build the
 # font cache.  This takes a while and also causes spurious warnings, so
