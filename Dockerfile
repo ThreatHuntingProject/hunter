@@ -9,7 +9,7 @@ LABEL maintainer="The ThreatHunting Project <project@threathunting.net>"
 USER $NB_USER
 
 # Install Python packages.
-ENV INSTALL_PACKAGES_CONDA plotly elasticsearch-dsl seaborn scikit-learn ipywidgets tqdm requests dask
+ENV INSTALL_PACKAGES_CONDA plotly elasticsearch-dsl seaborn scikit-learn ipywidgets tqdm requests dask pyspark
 ENV INSTALL_PACKAGES_PIP splunk-sdk huntlib
 
 RUN conda install -y jupyter_contrib_nbextensions ${INSTALL_PACKAGES_CONDA} && \
