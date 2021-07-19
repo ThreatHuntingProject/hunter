@@ -9,11 +9,13 @@ LABEL maintainer="The ThreatHunting Project <project@threathunting.net>"
 USER $NB_USER
 
 # Install Python packages.
-ENV INSTALL_PACKAGES_CONDA plotly elasticsearch-dsl seaborn scikit-learn ipywidgets tqdm requests dask pyspark
-ENV INSTALL_PACKAGES_PIP splunk-sdk huntlib
+#ENV INSTALL_PACKAGES_CONDA plotly elasticsearch-dsl seaborn scikit-learn ipywidgets tqdm requests dask pyspark
+#ENV INSTALL_PACKAGES_PIP splunk-sdk huntlib
+ENV INSTALL_PACKAGES_PIP plotly elasticsearch-dsl seaborn scikit-learn ipywidgets tqdm requests dask pyspark splunk-sdk huntlib
 
-RUN conda install -y jupyter_contrib_nbextensions ${INSTALL_PACKAGES_CONDA} && \
-    pip install --upgrade ${INSTALL_PACKAGES_PIP} 
+#RUN conda install -y jupyter_contrib_nbextensions ${INSTALL_PACKAGES_CONDA} && \
+#    pip install --upgrade ${INSTALL_PACKAGES_PIP} 
+RUN pip install jupyter_contrib_nbextensions ${INSTALL_PACKAGES_PIP}
 
 # Set up some Jupyter Notebook extensions
 RUN jupyter nbextension enable toc2/main && \
