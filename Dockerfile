@@ -9,12 +9,7 @@ LABEL maintainer="The ThreatHunting Project <project@threathunting.net>"
 USER $NB_USER
 
 # Install Python packages.
-#ENV INSTALL_PACKAGES_CONDA plotly elasticsearch-dsl seaborn scikit-learn ipywidgets tqdm requests dask pyspark
-#ENV INSTALL_PACKAGES_PIP splunk-sdk huntlib
 ENV INSTALL_PACKAGES_PIP plotly elasticsearch-dsl seaborn scikit-learn ipywidgets tqdm requests dask pyspark splunk-sdk huntlib
-
-#RUN conda install -y jupyter_contrib_nbextensions ${INSTALL_PACKAGES_CONDA} && \
-#    pip install --upgrade ${INSTALL_PACKAGES_PIP} 
 RUN pip install jupyter_contrib_nbextensions ${INSTALL_PACKAGES_PIP}
 
 # Set up some Jupyter Notebook extensions
@@ -23,7 +18,7 @@ RUN jupyter nbextension enable toc2/main && \
   jupyter nbextension enable python-markdown/main
 
 # Set up some useful Jupyter Lab extensions
-RUN jupyter labextension install jupyterlab-plotly  @jupyterlab/toc
+RUN jupyter labextension install --minimize=false jupyterlab-plotly  @jupyterlab/toc
 
 # The first time you 'import plotly' on a new system, it has to build the
 # font cache.  This takes a while and also causes spurious warnings, so
